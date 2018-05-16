@@ -15,8 +15,9 @@
 * the License.
 */
 
-require_once 'lib/AipBase.php';
+namespace Reprover\BaiduAi;
 
+use Reprover\BaiduAi\Lib\AipBase;
 /**
  * 黄反识别
  */

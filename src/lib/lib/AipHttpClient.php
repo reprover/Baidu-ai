@@ -15,6 +15,8 @@
 * the License.
 */
 
+namespace Reprover\BaiduAi\Lib;
+
 /**
  * Http Client
  */

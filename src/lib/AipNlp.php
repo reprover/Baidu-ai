@@ -15,7 +15,10 @@
 * the License.
 */
 
-require_once 'lib/AipBase.php';
+namespace Reprover\BaiduAi;
+
+use Reprover\BaiduAi\Lib\AipBase;
+
 class AipNlp extends AipBase {
 
     /**

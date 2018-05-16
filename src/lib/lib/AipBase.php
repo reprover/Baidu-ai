@@ -15,8 +15,8 @@
 * the License.
 */
 
-require_once 'AipHttpClient.php';
-require_once 'AipBCEUtil.php';
+namespace Reprover\BaiduAi\Lib;
+use \Exception;
 
 /**
  * Aip Base 基类
