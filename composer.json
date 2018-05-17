@@ -9,7 +9,9 @@
             "email": "mydr@vip.qq.com"
         }
     ],
-    "require": {},
+    "require": {
+        "laravel":">=5.5"
+    },
     "extra":{
         "laravel": {
             "providers": [
