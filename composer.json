@@ -9,5 +9,15 @@
             "email": "mydr@vip.qq.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "extra":{
+        "laravel": {
+            "providers": [
+                "Reprover\\BaiduAi\\ServiceProvider"
+            ],
+            "aliases": {
+                "Ai": "Reprover\\BaiduAi\\Facade"
+            }
+        }
+    }
 }

@@ -5,9 +5,16 @@ namespace Reprover\BaiduAi;
 class Ai
 {
 
-    private $map
+    const MAP
         = [
-            'nlp' => AipNlp::class,
+            'Nlp' => AipNlp::class,
+            'Speech' => AipSpeech::class,
+            'Face' => AipFace::class,
+            'ImageCensor' => AipImageCensor::class,
+            'ImageClassify' => AipImageClassify::class,
+            'Kg' => AipKg::class,
+            'ImageSearch' => AipImageSearch::class,
+            'Ocr' => AipOcr::class,
         ];
 
     protected $driver;
@@ -16,17 +23,28 @@ class Ai
     protected $apiKey;
     protected $apiSecret;
 
-    public function __construct($config)
+    public function __construct()
     {
-        $this->appId = $config['appid'];
+        $config = config('ai');
+        $this->appId = $config['appId'];
         $this->apiKey = $config['apiKey'];
         $this->apiSecret = $config['apiSecret'];
     }
 
-    public function driver($driver)
+    /**
+     * @param $name
+     * @param $arguments
+     *
+     * @return mixed
+     * @throws \Exception
+     */
+    public function __call($name, $arguments)
     {
-        $driverClass = $this->map[$driver];
-        $this->driver = new $driverClass($this->appId, $this->apiKey, $this->apiSecret);
-        return $this->driver;
+        if (!key_exists($name, self::MAP)) {
+            throw new \Exception('driver does not exists.');
+        }
+        $driver = self::MAP[$name];
+
+        return new $driver($this->appId, $this->apiKey, $this->apiSecret);
     }
 }
