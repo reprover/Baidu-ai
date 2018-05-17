@@ -2,7 +2,7 @@
     "name": "reprover/baidu-ai",
     "description": "百度AI开放平台封装sdk",
     "type": "library",
-    "license": "Apache",
+    "license": "MIT",
     "authors": [
         {
             "name": "Jian Li",
