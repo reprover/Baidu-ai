@@ -10,8 +10,9 @@
         }
     ],
     "autoload": {
-    "psr-0": {
-      "Reprover\\BaiduAi\\": "src/"
+        "psr-0": {
+            "Reprover\\BaiduAi\\": "src/"
+	}
     },
     "require": {
         "laravel":">=5.5"
