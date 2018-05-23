@@ -15,7 +15,7 @@
 	}
     },
     "require": {
-        "laravel":">=5.5"
+        "laravel/laravel":">=5.5"
     },
     "extra":{
         "laravel": {
