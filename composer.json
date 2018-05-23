@@ -9,6 +9,10 @@
             "email": "mydr@vip.qq.com"
         }
     ],
+    "autoload": {
+    "psr-0": {
+      "Reprover\\BaiduAi\\": "src/"
+    },
     "require": {
         "laravel":">=5.5"
     },
