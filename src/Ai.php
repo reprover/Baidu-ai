@@ -7,16 +7,16 @@ class Ai
 
     const MAP
         = [
-            'BodyAnalysis'=> AipBodyAnalysis::class,
-            'ContentCensor' => AipContentCensor::class,
-            'ImageCensor' => AipImageCensor::class,
-            'ImageClassify' => AipImageClassify::class,
-            'ImageSearch' => AipImageSearch::class,
-            'Kg' => AipKg::class,
-            'Nlp' => AipNlp::class,
-            'Ocr' => AipOcr::class,
-            'Speech' => AipSpeech::class,
-            'Face' => AipFace::class,
+            'BodyAnalysis'=> \AipBodyAnalysis::class,
+            'ContentCensor' => \AipContentCensor::class,
+            'ImageCensor' => \AipImageCensor::class,
+            'ImageClassify' => \AipImageClassify::class,
+            'ImageSearch' => \AipImageSearch::class,
+            'Kg' => \AipKg::class,
+            'Nlp' => \AipNlp::class,
+            'Ocr' => \AipOcr::class,
+            'Speech' => \AipSpeech::class,
+            'Face' => \AipFace::class,
         ];
 
     protected $driver;
