@@ -15,9 +15,7 @@
 * the License.
 */
 
-namespace Reprover\BaiduAi;
-
-use Reprover\BaiduAi\Lib\AipBase;
+require_once 'lib/AipBase.php';
 
 /**
  * 百度语音
@@ -77,7 +75,7 @@ class AipSpeech extends AipBase{
      * @return mixed
      */
     protected function proccessResult($content){
-        $obj = json_decode($content, true, 512, JSON_BIGINT_AS_STRING);
+        $obj = json_decode($content, true);
 
         if($obj === null){
             $obj = array(

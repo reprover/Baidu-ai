@@ -15,10 +15,7 @@
 * the License.
 */
 
-namespace Reprover\BaiduAi;
-
-use Reprover\BaiduAi\Lib\AipBase;
-
+require_once 'lib/AipBase.php';
 class AipKg extends AipBase {
 
     /**

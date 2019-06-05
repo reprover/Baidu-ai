@@ -15,9 +15,7 @@
 * the License.
 */
 
-namespace Reprover\BaiduAi;
-
-use Reprover\BaiduAi\Lib\AipBase;
+require_once 'lib/AipBase.php';
 
 class AipOcr extends AipBase {
 
@@ -100,10 +98,22 @@ class AipOcr extends AipBase {
     private $receiptUrl = 'https://aip.baidubce.com/rest/2.0/ocr/v1/receipt';
 
     /**
-     * 自定义模版文字识别 custom api url
+     * 火车票识别 train_ticket api url
      * @var string
      */
-    private $customUrl = 'https://aip.baidubce.com/rest/2.0/solution/v1/iocr/recognise';
+    private $trainTicketUrl = 'https://aip.baidubce.com/rest/2.0/ocr/v1/train_ticket';
+
+    /**
+     * 出租车票识别 taxi_receipt api url
+     * @var string
+     */
+    private $taxiReceiptUrl = 'https://aip.baidubce.com/rest/2.0/ocr/v1/taxi_receipt';
+
+    /**
+     * 表格文字识别同步接口 form api url
+     * @var string
+     */
+    private $formUrl = 'https://aip.baidubce.com/rest/2.0/ocr/v1/form';
 
     /**
      * 表格文字识别 table_recognize api url
@@ -116,6 +126,54 @@ class AipOcr extends AipBase {
      * @var string
      */
     private $tableResultGetUrl = 'https://aip.baidubce.com/rest/2.0/solution/v1/form_ocr/get_request_result';
+
+    /**
+     * 增值税发票识别 vat_invoice api url
+     * @var string
+     */
+    private $vatInvoiceUrl = 'https://aip.baidubce.com/rest/2.0/ocr/v1/vat_invoice';
+
+    /**
+     * 二维码识别 qrcode api url
+     * @var string
+     */
+    private $qrcodeUrl = 'https://aip.baidubce.com/rest/2.0/ocr/v1/qrcode';
+
+    /**
+     * 数字识别 numbers api url
+     * @var string
+     */
+    private $numbersUrl = 'https://aip.baidubce.com/rest/2.0/ocr/v1/numbers';
+
+    /**
+     * 彩票识别 lottery api url
+     * @var string
+     */
+    private $lotteryUrl = 'https://aip.baidubce.com/rest/2.0/ocr/v1/lottery';
+
+    /**
+     * 护照识别 passport api url
+     * @var string
+     */
+    private $passportUrl = 'https://aip.baidubce.com/rest/2.0/ocr/v1/passport';
+
+    /**
+     * 名片识别 business_card api url
+     * @var string
+     */
+    private $businessCardUrl = 'https://aip.baidubce.com/rest/2.0/ocr/v1/business_card';
+
+    /**
+     * 手写文字识别 handwriting api url
+     * @var string
+     */
+    private $handwritingUrl = 'https://aip.baidubce.com/rest/2.0/ocr/v1/handwriting';
+
+    /**
+     * 自定义模板文字识别 custom api url
+     * @var string
+     */
+    private $customUrl = 'https://aip.baidubce.com/rest/2.0/solution/v1/iocr/recognise';
 
     
 
@@ -351,7 +409,7 @@ class AipOcr extends AipBase {
      * 身份证识别接口
      *
      * @param string $image - 图像数据，base64编码，要求base64编码后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/png/bmp格式
-     * @param string $idCardSide - front：身份证正面；back：身份证背面
+     * @param string $idCardSide - front：身份证含照片的一面；back：身份证带国徽的一面
      * @param array $options - 可选参数对象，key: value都为string类型
      * @description options列表:
      *   detect_direction 是否检测图像朝向，默认不检测，即：false。朝向是指输入图像是正常方向、逆时针旋转90/180/270度。可选值包括:<br>- true：检测朝向；<br>- false：不检测朝向。
@@ -493,24 +551,60 @@ class AipOcr extends AipBase {
     }
 
     /**
-     * 自定义模版文字识别接口
+     * 火车票识别接口
      *
      * @param string $image - 图像数据，base64编码，要求base64编码后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/png/bmp格式
-     * @param string $templateSign - 您在自定义文字识别平台制作的模版的ID
      * @param array $options - 可选参数对象，key: value都为string类型
      * @description options列表:
      * @return array
      */
-    public function custom($image, $templateSign, $options=array()){
+    public function trainTicket($image, $options=array()){
 
         $data = array();
         
         $data['image'] = base64_encode($image);
-        $data['templateSign'] = $templateSign;
 
         $data = array_merge($data, $options);
 
-        return $this->request($this->customUrl, $data);
+        return $this->request($this->trainTicketUrl, $data);
+    }
+
+    /**
+     * 出租车票识别接口
+     *
+     * @param string $image - 图像数据，base64编码，要求base64编码后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/png/bmp格式
+     * @param array $options - 可选参数对象，key: value都为string类型
+     * @description options列表:
+     * @return array
+     */
+    public function taxiReceipt($image, $options=array()){
+
+        $data = array();
+        
+        $data['image'] = base64_encode($image);
+
+        $data = array_merge($data, $options);
+
+        return $this->request($this->taxiReceiptUrl, $data);
+    }
+
+    /**
+     * 表格文字识别同步接口接口
+     *
+     * @param string $image - 图像数据，base64编码，要求base64编码后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/png/bmp格式
+     * @param array $options - 可选参数对象，key: value都为string类型
+     * @description options列表:
+     * @return array
+     */
+    public function form($image, $options=array()){
+
+        $data = array();
+        
+        $data['image'] = base64_encode($image);
+
+        $data = array_merge($data, $options);
+
+        return $this->request($this->formUrl, $data);
     }
 
     /**
@@ -550,6 +644,164 @@ class AipOcr extends AipBase {
         $data = array_merge($data, $options);
 
         return $this->request($this->tableResultGetUrl, $data);
+    }
+
+    /**
+     * 增值税发票识别接口
+     *
+     * @param string $image - 图像数据，base64编码，要求base64编码后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/png/bmp格式
+     * @param array $options - 可选参数对象，key: value都为string类型
+     * @description options列表:
+     * @return array
+     */
+    public function vatInvoice($image, $options=array()){
+
+        $data = array();
+        
+        $data['image'] = base64_encode($image);
+
+        $data = array_merge($data, $options);
+
+        return $this->request($this->vatInvoiceUrl, $data);
+    }
+
+    /**
+     * 二维码识别接口
+     *
+     * @param string $image - 图像数据，base64编码，要求base64编码后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/png/bmp格式
+     * @param array $options - 可选参数对象，key: value都为string类型
+     * @description options列表:
+     * @return array
+     */
+    public function qrcode($image, $options=array()){
+
+        $data = array();
+        
+        $data['image'] = base64_encode($image);
+
+        $data = array_merge($data, $options);
+
+        return $this->request($this->qrcodeUrl, $data);
+    }
+
+    /**
+     * 数字识别接口
+     *
+     * @param string $image - 图像数据，base64编码，要求base64编码后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/png/bmp格式
+     * @param array $options - 可选参数对象，key: value都为string类型
+     * @description options列表:
+     *   recognize_granularity 是否定位单字符位置，big：不定位单字符位置，默认值；small：定位单字符位置
+     *   detect_direction 是否检测图像朝向，默认不检测，即：false。朝向是指输入图像是正常方向、逆时针旋转90/180/270度。可选值包括:<br>- true：检测朝向；<br>- false：不检测朝向。
+     * @return array
+     */
+    public function numbers($image, $options=array()){
+
+        $data = array();
+        
+        $data['image'] = base64_encode($image);
+
+        $data = array_merge($data, $options);
+
+        return $this->request($this->numbersUrl, $data);
+    }
+
+    /**
+     * 彩票识别接口
+     *
+     * @param string $image - 图像数据，base64编码，要求base64编码后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/png/bmp格式
+     * @param array $options - 可选参数对象，key: value都为string类型
+     * @description options列表:
+     *   recognize_granularity 是否定位单字符位置，big：不定位单字符位置，默认值；small：定位单字符位置
+     * @return array
+     */
+    public function lottery($image, $options=array()){
+
+        $data = array();
+        
+        $data['image'] = base64_encode($image);
+
+        $data = array_merge($data, $options);
+
+        return $this->request($this->lotteryUrl, $data);
+    }
+
+    /**
+     * 护照识别接口
+     *
+     * @param string $image - 图像数据，base64编码，要求base64编码后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/png/bmp格式
+     * @param array $options - 可选参数对象，key: value都为string类型
+     * @description options列表:
+     * @return array
+     */
+    public function passport($image, $options=array()){
+
+        $data = array();
+        
+        $data['image'] = base64_encode($image);
+
+        $data = array_merge($data, $options);
+
+        return $this->request($this->passportUrl, $data);
+    }
+
+    /**
+     * 名片识别接口
+     *
+     * @param string $image - 图像数据，base64编码，要求base64编码后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/png/bmp格式
+     * @param array $options - 可选参数对象，key: value都为string类型
+     * @description options列表:
+     * @return array
+     */
+    public function businessCard($image, $options=array()){
+
+        $data = array();
+        
+        $data['image'] = base64_encode($image);
+
+        $data = array_merge($data, $options);
+
+        return $this->request($this->businessCardUrl, $data);
+    }
+
+    /**
+     * 手写文字识别接口
+     *
+     * @param string $image - 图像数据，base64编码，要求base64编码后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/png/bmp格式
+     * @param array $options - 可选参数对象，key: value都为string类型
+     * @description options列表:
+     *   recognize_granularity 是否定位单字符位置，big：不定位单字符位置，默认值；small：定位单字符位置
+     * @return array
+     */
+    public function handwriting($image, $options=array()){
+
+        $data = array();
+        
+        $data['image'] = base64_encode($image);
+
+        $data = array_merge($data, $options);
+
+        return $this->request($this->handwritingUrl, $data);
+    }
+
+    /**
+     * 自定义模板文字识别接口
+     *
+     * @param string $image - 图像数据，base64编码，要求base64编码后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/png/bmp格式
+     * @param string $templateSign - 您在自定义文字识别平台制作的模板的ID
+     * @param array $options - 可选参数对象，key: value都为string类型
+     * @description options列表:
+     * @return array
+     */
+    public function custom($image, $templateSign, $options=array()){
+
+        $data = array();
+        
+        $data['image'] = base64_encode($image);
+        $data['templateSign'] = $templateSign;
+
+        $data = array_merge($data, $options);
+
+        return $this->request($this->customUrl, $data);
     }
 
     /**

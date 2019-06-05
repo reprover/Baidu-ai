@@ -15,9 +15,8 @@
 * the License.
 */
 
-namespace Reprover\BaiduAi;
+require_once 'lib/AipBase.php';
 
-use Reprover\BaiduAi\Lib\AipBase;
 /**
  * 黄反识别
  */
@@ -55,6 +54,11 @@ class AipImageCensor extends AipBase{
      * @var string
      */
     private $imageCensorUserDefinedUrl = 'https://aip.baidubce.com/rest/2.0/solution/v1/img_censor/user_defined';
+
+    /**
+     * @var string
+     */
+    private $antiSpamUrl = 'https://aip.baidubce.com/rest/2.0/antispam/v2/spam';
 
     /**
      * @param  string $image 图像读取
@@ -189,4 +193,19 @@ class AipImageCensor extends AipBase{
 
         return $this->request($this->imageCensorUserDefinedUrl, $data);     
     }
+
+    /**
+     * @param  string $content
+     * @return array
+     */
+    public function antiSpam($content, $options=array()){
+
+        $data = array();
+        $data['content'] = $content;
+
+        $data = array_merge($data, $options);
+
+        return $this->request($this->antiSpamUrl, $data);
+    }
+
 }

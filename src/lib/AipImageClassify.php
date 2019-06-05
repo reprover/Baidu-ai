@@ -15,11 +15,14 @@
 * the License.
 */
 
-namespace Reprover\BaiduAi;
-
-use Reprover\BaiduAi\Lib\AipBase;
-
+require_once 'lib/AipBase.php';
 class AipImageClassify extends AipBase {
+
+    /**
+     * 通用物体识别 advanced_general api url
+     * @var string
+     */
+    private $advancedGeneralUrl = 'https://aip.baidubce.com/rest/2.0/image-classify/v2/advanced_general';
 
     /**
      * 菜品识别 dish_detect api url
@@ -69,7 +72,33 @@ class AipImageClassify extends AipBase {
      */
     private $objectDetectUrl = 'https://aip.baidubce.com/rest/2.0/image-classify/v1/object_detect';
 
+    /**
+     * 地标识别 landmark api url
+     * @var string
+     */
+    private $landmarkUrl = 'https://aip.baidubce.com/rest/2.0/image-classify/v1/landmark';
+
     
+
+    /**
+     * 通用物体识别接口
+     *
+     * @param string $image - 图像数据，base64编码，要求base64编码后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/png/bmp格式
+     * @param array $options - 可选参数对象，key: value都为string类型
+     * @description options列表:
+     *   baike_num 返回百科信息的结果数，默认不返回
+     * @return array
+     */
+    public function advancedGeneral($image, $options=array()){
+
+        $data = array();
+        
+        $data['image'] = base64_encode($image);
+
+        $data = array_merge($data, $options);
+
+        return $this->request($this->advancedGeneralUrl, $data);
+    }
 
     /**
      * 菜品识别接口
@@ -78,6 +107,8 @@ class AipImageClassify extends AipBase {
      * @param array $options - 可选参数对象，key: value都为string类型
      * @description options列表:
      *   top_num 返回预测得分top结果数，默认为5
+     *   filter_threshold 默认0.95，可以通过该参数调节识别效果，降低非菜识别率.
+     *   baike_num 返回百科信息的结果数，默认不返回
      * @return array
      */
     public function dishDetect($image, $options=array()){
@@ -98,6 +129,7 @@ class AipImageClassify extends AipBase {
      * @param array $options - 可选参数对象，key: value都为string类型
      * @description options列表:
      *   top_num 返回预测得分top结果数，默认为5
+     *   baike_num 返回百科信息的结果数，默认不返回
      * @return array
      */
     public function carDetect($image, $options=array()){
@@ -197,6 +229,7 @@ class AipImageClassify extends AipBase {
      * @param array $options - 可选参数对象，key: value都为string类型
      * @description options列表:
      *   top_num 返回预测得分top结果数，默认为6
+     *   baike_num 返回百科信息的结果数，默认不返回
      * @return array
      */
     public function animalDetect($image, $options=array()){
@@ -216,6 +249,7 @@ class AipImageClassify extends AipBase {
      * @param string $image - 图像数据，base64编码，要求base64编码后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/png/bmp格式
      * @param array $options - 可选参数对象，key: value都为string类型
      * @description options列表:
+     *   baike_num 返回百科信息的结果数，默认不返回
      * @return array
      */
     public function plantDetect($image, $options=array()){
@@ -247,5 +281,24 @@ class AipImageClassify extends AipBase {
         $data = array_merge($data, $options);
 
         return $this->request($this->objectDetectUrl, $data);
+    }
+
+    /**
+     * 地标识别接口
+     *
+     * @param string $image - 图像数据，base64编码，要求base64编码后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/png/bmp格式
+     * @param array $options - 可选参数对象，key: value都为string类型
+     * @description options列表:
+     * @return array
+     */
+    public function landmark($image, $options=array()){
+
+        $data = array();
+        
+        $data['image'] = base64_encode($image);
+
+        $data = array_merge($data, $options);
+
+        return $this->request($this->landmarkUrl, $data);
     }
 }
