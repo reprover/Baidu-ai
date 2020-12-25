@@ -15,7 +15,7 @@
 * the License.
 */
 
-namespace Reprover\BaiduAi\Lib;
+namespace Reprover\BaiduAi\Lib\Lib;
 use \Exception;
 
 /**

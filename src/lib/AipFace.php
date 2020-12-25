@@ -15,9 +15,9 @@
 * the License.
 */
 
-namespace Reprover\BaiduAi;
+namespace Reprover\BaiduAi\Lib;
 
-use Reprover\BaiduAi\Lib\AipBase;
+use Reprover\BaiduAi\Lib\Lib\AipBase;
 
 class AipFace extends AipBase {
 
@@ -125,7 +125,7 @@ class AipFace extends AipBase {
     /**
      * 人脸比对接口
      *
-     * @param string $images - base64编码后的多张图片数据，半角逗号分隔，单次请求总共最大20M
+     * @param array $images - base64编码后的多张图片数据，半角逗号分隔，单次请求总共最大20M
      * @param array $options - 可选参数对象，key: value都为string类型
      * @description options列表:
      *   ext_fields 返回质量信息，取值固定:目前支持qualities(质量检测)。(对所有图片都会做改处理)

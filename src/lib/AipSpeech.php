@@ -15,9 +15,9 @@
 * the License.
 */
 
-namespace Reprover\BaiduAi;
+namespace Reprover\BaiduAi\Lib;
 
-use Reprover\BaiduAi\Lib\AipBase;
+use Reprover\BaiduAi\Lib\Lib\AipBase;
 
 /**
  * 百度语音
