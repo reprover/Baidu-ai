@@ -12,12 +12,13 @@
     "autoload": {
         "psr-4": {
             "Reprover\\BaiduAi\\": "src/"
-	}
+        }
     },
     "require": {
-        "laravel/laravel":">=5.5"
+        "laravel/framework": "6.*",
+        "baidu/aip-sdk": "^2.2"
     },
-    "extra":{
+    "extra": {
         "laravel": {
             "providers": [
                 "Reprover\\BaiduAi\\ServiceProvider"
