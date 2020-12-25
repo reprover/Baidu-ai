@@ -15,7 +15,7 @@
         }
     },
     "require": {
-        "laravel/framework": "6.*",
+        "laravel/framework": ">=6.0",
         "baidu/aip-sdk": "^2.2"
     },
     "extra": {

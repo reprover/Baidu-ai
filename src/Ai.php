@@ -2,6 +2,15 @@
 
 namespace Reprover\BaiduAi;
 
+use AipFace;
+use AipImageCensor;
+use AipImageClassify;
+use AipImageSearch;
+use AipKg;
+use AipNlp;
+use AipOcr;
+use AipSpeech;
+
 class Ai
 {
 
